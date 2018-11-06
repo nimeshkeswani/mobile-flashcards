@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native'
-import { createBottomTabNavigator } from 'react-navigation'
+import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
 import Decks from './components/Decks'
 import AddDeck from './components/AddDeck'
 import { white, red } from './utils/colors'
@@ -9,6 +9,7 @@ import { Constants } from 'expo'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import reducer from './reducers'
+import DeckDetails from './components/DeckDetails'
 
 const RouteConfigs = {
   Decks: {
@@ -49,6 +50,21 @@ const TabNavigatorConfig = {
 
 const Tabs = createBottomTabNavigator(RouteConfigs, TabNavigatorConfig)
 
+const StackNavigator = createStackNavigator({
+  Home: {
+    screen: Tabs,
+  },
+  DeckDetails: {
+    screen: DeckDetails,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: red,
+      }
+    }
+  }
+})
+
 function MobileFlashcardsStatusBar ({backgroundColor, ...props}) {
   return (
     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
@@ -63,7 +79,7 @@ export default class App extends React.Component {
       <Provider store={createStore(reducer)}>
         <View style={styles.container}>
           <MobileFlashcardsStatusBar backgroundColor={red} barStyle="light-content" />
-          <Tabs />
+          <StackNavigator />
         </View>
       </Provider>
     )
