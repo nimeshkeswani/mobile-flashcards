@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { initializeDecks, getDecks } from '../utils/api'
 import { receiveDecks } from '../actions/index'
+import Deck from './Deck'
 
 class Decks extends Component {
 
@@ -32,8 +33,7 @@ class Decks extends Component {
 		      			{ deckId: deck.title}
 		      		)}
 		        >
-			        <Text style={styles.titleText}>{deck.title}</Text>
-			        <Text style={styles.text}>{deck.totalCards} Cards</Text>
+			        <Deck deck={deck} />
 			    </TouchableOpacity>
 		      </View>
       ))}
@@ -53,14 +53,6 @@ const styles = StyleSheet.create({
   	padding: 15,
     backgroundColor: '#fff',
     alignItems: 'center',
-  },
-  titleText: {
-    fontSize: 30,
-    textAlign: 'center'
-  },
-  text: {
-    fontSize: 15,
-    textAlign: 'center'
   },
 });
 

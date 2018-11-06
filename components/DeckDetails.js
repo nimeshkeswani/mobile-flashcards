@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
+import Deck from './Deck'
 
 class DeckDetails extends Component {
 
@@ -15,12 +16,9 @@ class DeckDetails extends Component {
 
   render() {
 
-    console.log(this.props)
-
     return (
       <View style={styles.container}>
-        <Text>Deck Details</Text>
-        <Text>{ this.props.deck.title }</Text>
+        <Deck deck={this.props.deck} />
       </View>
     );
   }
@@ -29,7 +27,8 @@ class DeckDetails extends Component {
 
 const styles = StyleSheet.create({
   container: {
-  	padding: 15,
+    flex: 1,
+    padding: 15,
     backgroundColor: '#fff',
     alignItems: 'center',
   },
