@@ -6,6 +6,9 @@ import AddDeck from './components/AddDeck'
 import { white, red } from './utils/colors'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import reducer from './reducers'
 
 const RouteConfigs = {
   Decks: {
@@ -57,10 +60,12 @@ function MobileFlashcardsStatusBar ({backgroundColor, ...props}) {
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <MobileFlashcardsStatusBar backgroundColor={red} barStyle="light-content" />
-        <Tabs />
-      </View>
+      <Provider store={createStore(reducer)}>
+        <View style={styles.container}>
+          <MobileFlashcardsStatusBar backgroundColor={red} barStyle="light-content" />
+          <Tabs />
+        </View>
+      </Provider>
     )
   }
 }
