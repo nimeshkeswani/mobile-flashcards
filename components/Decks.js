@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { initializeDecks, getDecks } from '../utils/api'
 import { receiveDecks } from '../actions/index'
+import Deck from './Deck'
 
 class Decks extends Component {
 
@@ -20,18 +21,29 @@ class Decks extends Component {
   	const { decks } = this.props
 
     return (
-      <View>
-        <Text>Decks</Text>
-        {Object.keys(decks).map((deck) => (<Text key={deck}>{deck}</Text>))}
+      <View style={styles.container}>
+        {decks.map((deck) => (<Deck key={deck.title} deck={deck}/>))}
       </View>
     );
   }
 
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+  },
+});
+
 function mapStateToProps (decks) {
 	return {
-		decks
+		decks: Object.keys(decks).map((deck) => decks[deck]).map((deck) => {
+			let deckInfo = deck
+			deckInfo.totalCards = deckInfo.questions.length
+			return deckInfo
+		})
 	}
 }
 
