@@ -1,16 +1,33 @@
 import React from 'react'
 import { Text, View, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import { white, red } from '../utils/colors'
+import { connect } from 'react-redux'
+import { addDeck } from '../actions/index'
+import { saveDeckTitle } from '../utils/api'
+import { NavigationActions } from 'react-navigation'
 
-export default class AddDeck extends React.Component {
+class AddDeck extends React.Component {
 
 	state = {
 		newDeckName: ''
 	}
 
-	handleChange = (e) => (this.setState((state) => ({
-		newDeckName: e.value
-	})))
+	handleSubmit = () => {
+		const { newDeckName } = this.state
+		this.props.dispatch(addDeck({
+			[newDeckName]: {
+				title: newDeckName,
+				questions: []
+			}
+		}))
+		saveDeckTitle(newDeckName)
+		this.setState({newDeckName: ''})
+		this.toHome()
+	}
+
+  toHome = () => {
+    this.props.navigation.dispatch(NavigationActions.back({key: 'AddDeck'}))
+  }
 
   render() {
 
@@ -22,9 +39,11 @@ export default class AddDeck extends React.Component {
         <TextInput
 	        style={styles.textBox}
 	        value={newDeckName}
-	        onChange={this.handleChange}
+	        onChangeText={(newDeckName) => this.setState({newDeckName})}
       	/>
-      	<TouchableOpacity style={styles.submitBtn}>
+      	<TouchableOpacity
+      		style={styles.submitBtn}
+      		onPress={this.handleSubmit}>
 	        <Text style={styles.submitBtnText}>Create Deck</Text>
 	    </TouchableOpacity>
       </View>
@@ -64,3 +83,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+export default connect()(AddDeck)
