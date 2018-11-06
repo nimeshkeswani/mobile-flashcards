@@ -1,13 +1,22 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View, Platform } from 'react-native'
+import { createBottomTabNavigator } from 'react-navigation'
+import Decks from './components/Decks'
+import AddDeck from './components/AddDeck'
+import { purple, white } from './utils/colors'
+
+const Tabs = createBottomTabNavigator({
+  Decks: Decks,
+  AddDeck: AddDeck
+})
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
+        <Tabs />
       </View>
-    );
+    )
   }
 }
 
@@ -15,7 +24,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
