@@ -27,7 +27,18 @@ export function initializeDecks () {
       ]
     }
   }
-  return AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(data))
+
+  let results = AsyncStorage.getItem(DECKS_STORAGE_KEY)
+
+  if (results !== null) {
+    return AsyncStorage.getItem(DECKS_STORAGE_KEY)
+      .then((data) => JSON.parse(data))
+  }
+  else {
+    return AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(data))
+  }
+
+  
 }
 
 export function getDecks () {
