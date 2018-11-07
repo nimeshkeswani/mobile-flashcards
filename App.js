@@ -10,6 +10,7 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import reducer from './reducers'
 import DeckDetails from './components/DeckDetails'
+import AddCard from './components/AddCard'
 
 const RouteConfigs = {
   Decks: {
@@ -62,7 +63,16 @@ const StackNavigator = createStackNavigator({
         backgroundColor: red,
       }
     }
-  }
+  },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: red,
+      }
+    }
+  },
 })
 
 function MobileFlashcardsStatusBar ({backgroundColor, ...props}) {
