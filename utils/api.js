@@ -28,14 +28,17 @@ export function initializeDecks () {
     }
   }
 
-  let results = AsyncStorage.getItem(DECKS_STORAGE_KEY)
+  let results
+
+  AsyncStorage.getItem(DECKS_STORAGE_KEY)
+    .then((data) => (results = data))
 
   if (results !== null) {
-    return AsyncStorage.getItem(DECKS_STORAGE_KEY)
-      .then((data) => JSON.parse(data))
+    return getDecks()
   }
   else {
     return AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(data))
+      .then(getDecks)
   }
 
   
@@ -79,3 +82,4 @@ export function removeDeck (title) {
       AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(data))
     })
 }
+

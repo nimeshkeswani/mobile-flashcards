@@ -11,8 +11,7 @@ class Decks extends Component {
 		const { dispatch } = this.props
 
 		initializeDecks()
-			.then(getDecks()
-					.then((decks) => dispatch(receiveDecks(decks))))
+			.then((decks) => dispatch(receiveDecks(decks)))
 	}
 
 	navigateToDeckDetails = () => (this.props.navigation.navigate(
