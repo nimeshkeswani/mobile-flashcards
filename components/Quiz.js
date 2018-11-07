@@ -51,7 +51,7 @@ class Quiz extends Component {
     if (deck.questions.length === 0) {
       return (
         <View style={styles.container}>
-        <Text>There are no cards in this deck.</Text>
+        <Text style={styles.text}>There are no cards in this deck.</Text>
         </View>
       )
     }
@@ -59,44 +59,54 @@ class Quiz extends Component {
     if (questionIndex > (deck.totalCards - 1)) {
       return (
         <View style={styles.container}>
-        <Text>End of quiz.</Text>
-        <Text>You correctly answered {correctAnswers} out of {deck.totalCards} questions.</Text>
-        <TouchableOpacity
-          style={styles.incorrectBtn}
-          onPress={this.restartQuiz}>
-          <Text style={styles.btnText}>Restart Quiz</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.answerBtn}
-          onPress={() => this.props.navigation.navigate(
-              'DeckDetails',
-              { deckId: deckId }
-            )}>
-          <Text style={styles.btnText}>Back to Deck Details</Text>
-        </TouchableOpacity>
+          <View style={styles.container}>
+            <Text style={styles.text}>End of quiz.</Text>
+            <Text style={styles.text}>You correctly answered {correctAnswers} out of {deck.totalCards} questions.</Text>
+          </View>
+          <View style={styles.container}>
+            <TouchableOpacity
+              style={styles.incorrectBtn}
+              onPress={this.restartQuiz}>
+              <Text style={styles.btnText}>Restart Quiz</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.answerBtn}
+              onPress={() => this.props.navigation.navigate(
+                  'DeckDetails',
+                  { deckId: deckId }
+                )}>
+              <Text style={styles.btnText}>Back to Deck Details</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       )
     }
 
     return (
       <View style={styles.container}>
-        <Text>{questionIndex + 1}/{deck.totalCards}</Text>
-        {showAnswer ? <Text>{deck.questions[questionIndex].answer}</Text> : <Text>{deck.questions[questionIndex].question}</Text>}
-        <TouchableOpacity
-          style={styles.answerBtn}
-          onPress={this.toggleAnswerQuestion}>
-          <Text style={styles.btnText}>{showAnswer ? 'Question' : 'Answer'}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.correctBtn}
-          onPress={this.correct}>
-          <Text style={styles.btnText}>Correct</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.incorrectBtn}
-          onPress={this.incorrect}>
-          <Text style={styles.btnText}>Incorrect</Text>
-        </TouchableOpacity>
+        <View style={styles.container}>
+          <View style={styles.container}>
+            <Text style={styles.text}>{questionIndex + 1}/{deck.totalCards}</Text>
+          </View>
+          {showAnswer ? <Text style={styles.text}>{deck.questions[questionIndex].answer}</Text> : <Text style={styles.text}>{deck.questions[questionIndex].question}</Text>}
+          <TouchableOpacity
+            style={styles.answerBtn}
+            onPress={this.toggleAnswerQuestion}>
+            <Text style={styles.btnText}>{showAnswer ? 'Question' : 'Answer'}</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.container}>
+          <TouchableOpacity
+            style={styles.correctBtn}
+            onPress={this.correct}>
+            <Text style={styles.btnText}>Correct</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.incorrectBtn}
+            onPress={this.incorrect}>
+            <Text style={styles.btnText}>Incorrect</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -141,6 +151,10 @@ const styles = StyleSheet.create({
     color: white,
     fontSize: 22,
     textAlign: 'center',
+  },
+  text: {
+    fontSize: 30,
+    textAlign: 'center'
   },
 });
 
