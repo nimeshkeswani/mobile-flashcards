@@ -33,10 +33,10 @@ class AddCard extends React.Component {
       question: '',
       answer: ''
     })
-    this.toHome()
+    this.toDeckDetails()
 	}
 
-  toHome = () => {
+  toDeckDetails = () => {
     const { deckId } = this.props
     this.props.navigation.navigate(
             'DeckDetails',

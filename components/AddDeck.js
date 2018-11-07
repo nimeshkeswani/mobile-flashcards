@@ -22,11 +22,15 @@ class AddDeck extends React.Component {
 		}))
 		saveDeckTitle(newDeckName)
 		this.setState({newDeckName: ''})
-		this.toHome()
+		this.toDeckDetails()
 	}
 
-  toHome = () => {
-    this.props.navigation.dispatch(NavigationActions.back({key: 'AddDeck'}))
+  toDeckDetails = () => {
+    const { newDeckName } = this.state
+    this.props.navigation.navigate(
+            'DeckDetails',
+            { deckId: newDeckName }
+          )
   }
 
   render() {
