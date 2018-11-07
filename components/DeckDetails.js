@@ -3,6 +3,8 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import Deck from './Deck'
 import { red, white } from '../utils/colors'
+import { deleteDeck } from '../actions/index'
+import { removeDeck } from '../utils/api'
 
 class DeckDetails extends Component {
 
@@ -13,6 +15,23 @@ class DeckDetails extends Component {
      return {
       title: deckId
     }
+  }
+
+  deleteDeck = () => {
+    const { deckId } = this.props
+    this.props.dispatch(deleteDeck(deckId))
+    removeDeck(deckId)
+    this.toHome()
+  }
+
+  toHome = () => {
+    this.props.navigation.navigate(
+            'Home'
+          )
+  }
+
+  shouldComponentUpdate (nextProps) {
+    return nextProps.deck !== undefined
   }
 
   render() {
@@ -33,7 +52,9 @@ class DeckDetails extends Component {
         <TouchableOpacity style={styles.startQuizBtn}>
           <Text style={styles.startQuizBtnText}>Start Quiz</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.deleteDeckBtn}>
+        <TouchableOpacity
+          style={styles.deleteDeckBtn}
+          onPress={this.deleteDeck}>
           <Text style={styles.deleteDeckBtnText}>Delete Deck</Text>
         </TouchableOpacity>
       </View>
