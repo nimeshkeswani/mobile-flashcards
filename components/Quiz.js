@@ -60,7 +60,7 @@ class Quiz extends Component {
 
     return (
       <View style={styles.container}>
-        <Text>{deck.totalCards}</Text>
+        <Text>{questionIndex + 1}/{deck.totalCards}</Text>
         {showAnswer ? <Text>{deck.questions[questionIndex].answer}</Text> : <Text>{deck.questions[questionIndex].question}</Text>}
         <TouchableOpacity
           style={styles.answerBtn}
