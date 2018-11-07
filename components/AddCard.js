@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, View, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
-import { white, red } from '../utils/colors'
+import { white, red, gray } from '../utils/colors'
 import { connect } from 'react-redux'
 import { addCard } from '../actions/index'
 import { addCardToDeck } from '../utils/api'
@@ -63,7 +63,8 @@ class AddCard extends React.Component {
           onChangeText={(answer) => this.setState({answer})}
         />
       	<TouchableOpacity
-      		style={styles.submitBtn}
+      		style={question === '' || answer === '' ? styles.disabledSubmitBtn : styles.submitBtn}
+          disabled={question === '' || answer === '' ? true : false}
       		onPress={this.handleSubmit}>
 	        <Text style={styles.submitBtnText}>Add Card</Text>
 	    </TouchableOpacity>
@@ -92,6 +93,14 @@ const styles = StyleSheet.create({
   },
   submitBtn: {
     backgroundColor: red,
+    padding: 10,
+    borderRadius: 7,
+    height: 45,
+    marginLeft: 40,
+    marginRight: 40,
+  },
+  disabledSubmitBtn: {
+    backgroundColor: gray,
     padding: 10,
     borderRadius: 7,
     height: 45,
