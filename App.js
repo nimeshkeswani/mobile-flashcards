@@ -11,6 +11,7 @@ import { createStore } from 'redux'
 import reducer from './reducers'
 import DeckDetails from './components/DeckDetails'
 import AddCard from './components/AddCard'
+import Quiz from './components/Quiz'
 
 const RouteConfigs = {
   Decks: {
@@ -66,6 +67,15 @@ const StackNavigator = createStackNavigator({
   },
   AddCard: {
     screen: AddCard,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: red,
+      }
+    }
+  },
+  Quiz: {
+    screen: Quiz,
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {
