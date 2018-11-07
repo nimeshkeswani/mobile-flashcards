@@ -36,9 +36,15 @@ class Quiz extends Component {
     questionIndex: currentState.questionIndex + 1
   })))
 
+  restartQuiz = () => (this.setState((currentState) => ({
+    questionIndex: 0,
+    showAnswer: false,
+    correctAnswers: 0
+  })))
+
   render() {
 
-    const { deck } = this.props
+    const { deckId, deck } = this.props
 
     const { questionIndex, showAnswer, correctAnswers } = this.state
 
@@ -57,6 +63,11 @@ class Quiz extends Component {
         <View style={styles.container}>
         <Text>End of quiz.</Text>
         <Text>You correctly answered {correctAnswers} out of {deck.totalCards} questions.</Text>
+        <TouchableOpacity
+          style={styles.incorrectBtn}
+          onPress={this.restartQuiz}>
+          <Text style={styles.btnText}>Restart Quiz</Text>
+        </TouchableOpacity>
         </View>
       )
     }
