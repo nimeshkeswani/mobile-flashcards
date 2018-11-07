@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import Deck from './Deck'
-import { red, white, green } from '../utils/colors'
+import { red, white, green, gray } from '../utils/colors'
 import { deleteDeck } from '../actions/index'
 import { removeDeck } from '../utils/api'
 
@@ -18,14 +18,19 @@ class Quiz extends Component {
   }
 
   state = {
-    questionIndex: 0
+    questionIndex: 0,
+    showAnswer: false
   }
+
+  toggleAnswerQuestion = () => (this.setState((currentState) => ({
+    showAnswer: !currentState.showAnswer
+  })))
 
   render() {
 
     const { deck } = this.props
 
-    const { questionIndex } = this.state
+    const { questionIndex, showAnswer } = this.state
 
     console.log(this.props)
 
@@ -40,8 +45,12 @@ class Quiz extends Component {
     return (
       <View style={styles.container}>
         <Text>{deck.totalCards}</Text>
-        <Text>{deck.questions[questionIndex].question}</Text>
-        <Text>{deck.questions[questionIndex].answer}</Text>
+        {showAnswer ? <Text>{deck.questions[questionIndex].answer}</Text> : <Text>{deck.questions[questionIndex].question}</Text>}
+        <TouchableOpacity
+          style={styles.answerBtn}
+          onPress={this.toggleAnswerQuestion}>
+          <Text style={styles.btnText}>{showAnswer ? 'Question' : 'Answer'}</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           style={styles.correctBtn}
           onPress={() => console.log('Correct')}>
@@ -65,6 +74,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  answerBtn: {
+    backgroundColor: gray,
+    padding: 10,
+    borderRadius: 7,
+    height: 45,
+    marginLeft: 40,
+    marginRight: 40,
   },
   correctBtn: {
     backgroundColor: green,
