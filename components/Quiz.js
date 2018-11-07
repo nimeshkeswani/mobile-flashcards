@@ -26,6 +26,14 @@ class Quiz extends Component {
     showAnswer: !currentState.showAnswer
   })))
 
+  correct = () => (this.setState((currentState) => ({
+    questionIndex: currentState.questionIndex + 1
+  })))
+
+  incorrect = () => (this.setState((currentState) => ({
+    questionIndex: currentState.questionIndex + 1
+  })))
+
   render() {
 
     const { deck } = this.props
@@ -42,6 +50,14 @@ class Quiz extends Component {
       )
     }
 
+    if (questionIndex > (deck.totalCards - 1)) {
+      return (
+        <View style={styles.container}>
+        <Text>End of quiz.</Text>
+        </View>
+      )
+    }
+
     return (
       <View style={styles.container}>
         <Text>{deck.totalCards}</Text>
@@ -53,12 +69,12 @@ class Quiz extends Component {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.correctBtn}
-          onPress={() => console.log('Correct')}>
+          onPress={this.correct}>
           <Text style={styles.btnText}>Correct</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.incorrectBtn}
-          onPress={() => console.log('Incorrect')}>
+          onPress={this.incorrect}>
           <Text style={styles.btnText}>Incorrect</Text>
         </TouchableOpacity>
       </View>
