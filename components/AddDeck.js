@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, View, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
-import { white, red } from '../utils/colors'
+import { white, red, gray } from '../utils/colors'
 import { connect } from 'react-redux'
 import { addDeck } from '../actions/index'
 import { saveDeckTitle } from '../utils/api'
@@ -46,7 +46,8 @@ class AddDeck extends React.Component {
 	        onChangeText={(newDeckName) => this.setState({newDeckName})}
       	/>
       	<TouchableOpacity
-      		style={styles.submitBtn}
+      		style={newDeckName === '' ? styles.disabledSubmitBtn : styles.submitBtn}
+      		disabled={newDeckName === '' ? true : false}
       		onPress={this.handleSubmit}>
 	        <Text style={styles.submitBtnText}>Create Deck</Text>
 	    </TouchableOpacity>
@@ -75,6 +76,14 @@ const styles = StyleSheet.create({
   },
   submitBtn: {
     backgroundColor: red,
+    padding: 10,
+    borderRadius: 7,
+    height: 45,
+    marginLeft: 40,
+    marginRight: 40,
+  },
+  disabledSubmitBtn: {
+    backgroundColor: gray,
     padding: 10,
     borderRadius: 7,
     height: 45,
