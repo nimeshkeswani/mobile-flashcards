@@ -19,7 +19,8 @@ class Quiz extends Component {
 
   state = {
     questionIndex: 0,
-    showAnswer: false
+    showAnswer: false,
+    correctAnswers: 0
   }
 
   toggleAnswerQuestion = () => (this.setState((currentState) => ({
@@ -27,7 +28,8 @@ class Quiz extends Component {
   })))
 
   correct = () => (this.setState((currentState) => ({
-    questionIndex: currentState.questionIndex + 1
+    questionIndex: currentState.questionIndex + 1,
+    correctAnswers: currentState.correctAnswers + 1
   })))
 
   incorrect = () => (this.setState((currentState) => ({
@@ -38,7 +40,7 @@ class Quiz extends Component {
 
     const { deck } = this.props
 
-    const { questionIndex, showAnswer } = this.state
+    const { questionIndex, showAnswer, correctAnswers } = this.state
 
     console.log(this.props)
 
@@ -54,6 +56,7 @@ class Quiz extends Component {
       return (
         <View style={styles.container}>
         <Text>End of quiz.</Text>
+        <Text>You correctly answered {correctAnswers} out of {deck.totalCards} questions.</Text>
         </View>
       )
     }
