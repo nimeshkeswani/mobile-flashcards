@@ -8,18 +8,22 @@ import { removeDeck } from '../utils/api'
 
 class Quiz extends Component {
 
-  static navigationOptions = () => {
+  static navigationOptions = ({ navigation }) => {
+
+    const { deckId } = navigation.state.params
      
      return {
-      title: 'Quiz'
+      title: 'Quiz: ' + deckId
     }
   }
 
   render() {
 
+    console.log(this.props)
+
     return (
       <View style={styles.container}>
-        <Text>Quiz</Text>
+        <Text>{this.props.deck.totalCards}</Text>
       </View>
     );
   }
@@ -36,4 +40,13 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect()(Quiz)
+function mapStateToProps (state, { navigation }) {
+  const { deckId } = navigation.state.params
+  const deck = state[deckId]
+   return {
+    deckId,
+    deck,
+  }
+}
+
+export default connect(mapStateToProps)(Quiz)
