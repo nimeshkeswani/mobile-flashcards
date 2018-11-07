@@ -10,7 +10,7 @@ class Decks extends Component {
 	componentDidMount () {
 		const { dispatch } = this.props
 
-		initializeDecks()
+		getDecks()
 			.then((decks) => dispatch(receiveDecks(decks)))
 	}
 
@@ -21,6 +21,14 @@ class Decks extends Component {
   render() {
 
   	const { decks } = this.props
+
+  	if (decks.length === 0) {
+  		return (
+	      <View style={styles.container}>
+	        <Text style={styles.text}>No Decks Present.</Text>
+	      </View>
+  		)
+  	}
 
     return (
       <View style={styles.container}>
@@ -52,6 +60,10 @@ const styles = StyleSheet.create({
   	padding: 15,
     backgroundColor: '#fff',
     alignItems: 'center',
+  },
+  text: {
+    fontSize: 25,
+    textAlign: 'center'
   },
 });
 
