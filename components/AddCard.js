@@ -8,6 +8,13 @@ import { NavigationActions } from 'react-navigation'
 
 class AddCard extends React.Component {
 
+  static navigationOptions = () => {
+     
+     return {
+      title: 'Add Card'
+    }
+  }
+
 	state = {
 		question: '',
     answer: ''
