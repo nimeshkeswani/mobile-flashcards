@@ -3,8 +3,7 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import Deck from './Deck'
 import { red, white, green, gray } from '../utils/colors'
-import { deleteDeck } from '../actions/index'
-import { removeDeck } from '../utils/api'
+import { clearLocalNotification, setLocalNotification } from '../utils/api'
 
 class Quiz extends Component {
 
@@ -57,6 +56,8 @@ class Quiz extends Component {
     }
 
     if (questionIndex > (deck.totalCards - 1)) {
+      clearLocalNotification()
+        .then(setLocalNotification)
       return (
         <View style={styles.container}>
           <View style={styles.container}>

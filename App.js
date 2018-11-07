@@ -12,6 +12,7 @@ import reducer from './reducers'
 import DeckDetails from './components/DeckDetails'
 import AddCard from './components/AddCard'
 import Quiz from './components/Quiz'
+import { setLocalNotification } from './utils/api'
 
 const RouteConfigs = {
   Decks: {
@@ -94,6 +95,9 @@ function MobileFlashcardsStatusBar ({backgroundColor, ...props}) {
 }
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
   render() {
     return (
       <Provider store={createStore(reducer)}>
