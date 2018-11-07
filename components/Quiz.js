@@ -48,8 +48,6 @@ class Quiz extends Component {
 
     const { questionIndex, showAnswer, correctAnswers } = this.state
 
-    console.log(this.props)
-
     if (deck.questions.length === 0) {
       return (
         <View style={styles.container}>
